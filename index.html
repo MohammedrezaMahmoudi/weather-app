@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اپ آب‌وهوا</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>🌤️ آب‌وهوا</h1>
+        <p class="subtitle">اسم شهر رو بنویس</p>
+      </header>
+
+      <form id="search-form" class="search-form">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="مثلاً: تهران، London، Tokyo"
+          required
+        />
+        <button type="submit">جستجو</button>
+      </form>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>در حال گرفتن اطلاعات...</p>
+      </div>
+
+      <div id="error" class="error hidden">
+        <p id="error-text">شهر پیدا نشد!</p>
+      </div>
+
+      <div id="weather" class="weather hidden">
+        <div class="weather-main">
+          <div class="weather-icon" id="weather-icon">☀️</div>
+          <div class="weather-temp" id="weather-temp">--°</div>
+        </div>
+
+        <h2 class="weather-city" id="weather-city">---</h2>
+        <p class="weather-condition" id="weather-condition">---</p>
+
+        <div class="weather-details">
+          <div class="detail-card">
+            <span class="detail-icon">💧</span>
+            <span class="detail-label">رطوبت</span>
+            <span class="detail-value" id="weather-humidity">--%</span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-icon">💨</span>
+            <span class="detail-label">باد</span>
+            <span class="detail-value" id="weather-wind">-- km/h</span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-icon">🌡️</span>
+            <span class="detail-label">احساس</span>
+            <span class="detail-value" id="weather-feels">--°</span>
+          </div>
+
+          <div class="hourly-section">
+            <h3 class="hourly-title">⏰ پیش‌بینی ساعتی</h3>
+            <div class="hourly-list" id="hourly-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

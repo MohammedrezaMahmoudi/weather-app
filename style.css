@@ -1,0 +1,405 @@
+/* ============================================
+   ۱. متغیرها
+   ============================================ */
+:root {
+  --primary: #4a90e2;
+  --primary-dark: #357abd;
+  --bg: #f0f4f8;
+  --card-bg: #ffffff;
+  --text: #2c3e50;
+  --text-muted: #7f8c8d;
+  --border: #e1e8ed;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* ============================================
+   ۲. ریست
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ============================================
+   ۳. کانتینر اصلی — کاملاً انعطاف‌پذیر
+   ============================================ */
+.app {
+  width: 100%;
+  max-width: 100%; /* در موبایل تمام عرض */
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 20px;
+  overflow: hidden;
+}
+
+/* ============================================
+   ۴. هدر با فونت انعطاف‌پذیر
+   ============================================ */
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-header h1 {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: clamp(0.75rem, 3vw, 0.85rem);
+  color: var(--text-muted);
+}
+
+/* ============================================
+   ۵. فرم جستجو
+   ============================================ */
+.search-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+#city-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+  min-width: 0;
+  color: var(--text);
+  background: var(--card-bg);
+}
+
+#city-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.search-form button {
+  padding: 12px 18px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.search-form button:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================
+   ۶. حالت‌ها
+   ============================================ */
+.hidden {
+  display: none !important;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  background: #fee;
+  color: #c0392b;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   ۷. کارت هوا با فونت انعطاف‌پذیر
+   ============================================ */
+.weather {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weather-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.weather-icon {
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 1;
+}
+
+.weather-temp {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: bold;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.weather-city {
+  text-align: center;
+  font-size: clamp(1rem, 4vw, 1.6rem);
+  margin-bottom: 4px;
+}
+
+.weather-condition {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   ۸. جزئیات — چیدمان Grid انعطاف‌پذیر
+   ============================================ */
+.weather-details {
+  display: grid;
+  /* این خط جادویی است: به مرورگر می‌گوید تا زمانی که فضا کافی باشد، کارت‌ها را کنار هم بچیند */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.detail-card {
+  background: var(--bg);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column; /* همیشه عمودی برای خوانایی بهتر */
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  min-height: 100px; /* حداقل ارتفاع برای یکنواختی */
+  justify-content: center;
+}
+
+.detail-icon {
+  font-size: 1.6rem;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.detail-value {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+/* ============================================
+   ۹. پیش‌بینی ساعتی با اسکرول افقی
+   ============================================ */
+.hourly-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.hourly-title {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.hourly-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 4px 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  cursor: grab;
+}
+
+.hourly-list:active {
+  cursor: grabbing;
+}
+
+.hourly-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hourly-list::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-radius: 10px;
+}
+
+.hourly-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.hourly-item {
+  flex: 0 0 70px;
+  width: 70px;
+  padding: 12px 8px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.hourly-item:hover {
+  background: #e1ecf7;
+  transform: translateY(-2px);
+}
+
+.hourly-item.now {
+  background: var(--primary);
+  color: white;
+}
+
+.hourly-item.now .hourly-hour,
+.hourly-item.now .hourly-temp {
+  color: white;
+}
+
+.hourly-hour {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.hourly-icon {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hourly-temp {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* ============================================
+   ۱۰. تنظیمات برای صفحه‌های بزرگتر (تبلت و دسکتاپ)
+   ============================================ */
+@media (min-width: 600px) {
+  .app {
+    max-width: 720px; /* کانتینر در تبلت و دسکتاپ پهن‌تر می‌شود */
+    padding: 32px 28px;
+  }
+
+  .hourly-item {
+    flex: 0 0 80px;
+    width: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    max-width: 960px;
+    padding: 40px 50px;
+  }
+
+  .hourly-item {
+    flex: 0 0 90px;
+    width: 90px;
+  }
+}
+
+/* ============================================
+   ۱۱. تنظیمات برای موبایل‌های خیلی کوچک
+   ============================================ */
+@media (max-width: 360px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
+
+  .hourly-item {
+    flex: 0 0 60px;
+    width: 60px;
+    padding: 10px 6px;
+  }
+}
+
+/* ============================================
+   ۱۲. حالت تاریک
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a2e;
+    --card-bg: #16213e;
+    --text: #eaeaea;
+    --text-muted: #a0a0a0;
+    --border: #2c3e50;
+  }
+
+  .hourly-item:hover {
+    background: #1f2a44;
+  }
+
+  .hourly-item.now {
+    background: var(--primary);
+  }
+
+  .error {
+    background: #3a1e1e;
+    color: #ff9999;
+  }
+}
