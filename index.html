@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>آب‌وهوا | Weather</title>
 
-    <!-- فونت Vazirmatn -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,11 +12,9 @@
       rel="stylesheet"
     />
 
-    <!-- آیکون‌ها (اختیاری - برای بعد) -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- پس‌زمینه انیمیشنی -->
     <div class="bg-animation">
       <span></span>
       <span></span>
@@ -27,7 +24,7 @@
     <div class="app">
       <header class="app-header">
         <h1>🌤️ آب‌وهوا</h1>
-        <p class="subtitle">اسم شهرت رو بنویس تا هوا رو ببینی</p>
+        <p class="subtitle">اسم شهرت رو بنویس</p>
       </header>
 
       <form id="search-form" class="search-form">
@@ -44,57 +41,13 @@
         </button>
       </form>
 
-      <div id="loading" class="loading hidden">
-        <div class="spinner"></div>
-        <p>در حال گرفتن اطلاعات...</p>
-      </div>
-
       <div id="error" class="error hidden">
         <span class="error-icon">⚠️</span>
         <p id="error-text">شهر پیدا نشد!</p>
       </div>
 
-      <div id="weather" class="weather hidden">
-        <div class="weather-main">
-          <div class="weather-icon" id="weather-icon">☀️</div>
-          <div class="weather-info">
-            <div class="weather-temp" id="weather-temp">--°</div>
-            <div class="weather-city" id="weather-city">---</div>
-            <div class="weather-condition" id="weather-condition">---</div>
-          </div>
-        </div>
-
-        <div class="weather-details">
-          <div class="detail-card">
-            <div class="detail-icon">💧</div>
-            <div class="detail-content">
-              <span class="detail-label">رطوبت</span>
-              <span class="detail-value" id="weather-humidity">--%</span>
-            </div>
-          </div>
-
-          <div class="detail-card">
-            <div class="detail-icon">💨</div>
-            <div class="detail-content">
-              <span class="detail-label">باد</span>
-              <span class="detail-value" id="weather-wind">-- km/h</span>
-            </div>
-          </div>
-
-          <div class="detail-card">
-            <div class="detail-icon">🌡️</div>
-            <div class="detail-content">
-              <span class="detail-label">احساس</span>
-              <span class="detail-value" id="weather-feels">--°</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hourly-section">
-          <h3 class="hourly-title">⏰ پیش‌بینی ساعتی</h3>
-          <div class="hourly-list" id="hourly-list"></div>
-        </div>
-      </div>
+      <!-- گرید کارت‌ها (لودینگ هم داخلش میاد) -->
+      <div id="cards-grid" class="cards-grid"></div>
     </div>
 
     <script src="app.js"></script>

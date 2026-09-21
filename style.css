@@ -1,28 +1,22 @@
 /* ============================================
-   ۱. متغیرها و پالت رنگ
+   ۱. متغیرها
    ============================================ */
 :root {
-  /* رنگ‌های اصلی */
   --primary: #667eea;
   --primary-dark: #5568d3;
   --accent: #ffd93d;
 
-  /* رنگ‌های گرادینت */
   --gradient-1: #667eea;
   --gradient-2: #764ba2;
 
-  /* شیشه‌ای */
   --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-bg-hover: rgba(255, 255, 255, 0.25);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
-  /* متن */
   --text-main: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.55);
 
-  /* Radius */
   --radius-lg: 24px;
   --radius-md: 16px;
   --radius-sm: 12px;
@@ -52,12 +46,11 @@ body {
   line-height: 1.6;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow-x: hidden;
   position: relative;
 }
 
-/* انیمیشن پس‌زمینه گرادینت */
 @keyframes gradientShift {
   0%,
   100% {
@@ -69,7 +62,7 @@ body {
 }
 
 /* ============================================
-   ۳. پس‌زمینه انیمیشنی (حباب‌ها)
+   ۳. پس‌زمینه انیمیشنی
    ============================================ */
 .bg-animation {
   position: fixed;
@@ -85,8 +78,6 @@ body {
 .bg-animation span {
   position: absolute;
   display: block;
-  width: 20px;
-  height: 20px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   animation: bubbleUp 25s linear infinite;
@@ -132,7 +123,7 @@ body {
 }
 
 /* ============================================
-   ۴. کانتینر اصلی (شیشه‌ای)
+   ۴. کانتینر اصلی
    ============================================ */
 .app {
   width: 100%;
@@ -171,7 +162,6 @@ body {
 .app-header h1 {
   font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 900;
-  color: var(--text-main);
   margin-bottom: 8px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
@@ -240,47 +230,20 @@ body {
   background: #ffce1f;
 }
 
-.search-form button:active {
-  transform: translateY(0);
-}
-
 .btn-icon {
   font-size: 1.1rem;
 }
 
 /* ============================================
-   ۷. حالت‌ها
+   ۷. حالت خطا
    ============================================ */
 .hidden {
   display: none !important;
 }
 
-.loading {
-  text-align: center;
-  padding: 40px 0;
-  color: var(--text-secondary);
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.2);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  margin: 0 auto 16px;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .error {
   background: rgba(255, 82, 82, 0.2);
   border: 1px solid rgba(255, 82, 82, 0.4);
-  color: #fff;
   padding: 16px 20px;
   border-radius: var(--radius-md);
   text-align: center;
@@ -290,6 +253,7 @@ body {
   gap: 10px;
   justify-content: center;
   backdrop-filter: blur(10px);
+  margin-bottom: 16px;
 }
 
 .error-icon {
@@ -297,34 +261,86 @@ body {
 }
 
 /* ============================================
-   ۸. کارت هوا
+   ۸. گرید کارت‌ها
    ============================================ */
-.weather {
-  animation: fadeIn 0.5s ease;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
 }
 
-@keyframes fadeIn {
+/* ============================================
+   ۹. کارت شهر
+   ============================================ */
+.city-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: all 0.3s;
+  position: relative;
+  animation: cardIn 0.5s ease;
+}
+
+@keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-.weather-main {
+.city-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* دکمه حذف */
+.card-remove {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 82, 82, 0.3);
+  border: 1px solid rgba(255, 82, 82, 0.5);
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  justify-content: center;
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.city-card:hover .card-remove {
+  opacity: 1;
+}
+
+.card-remove:hover {
+  background: rgba(255, 82, 82, 0.6);
+  transform: scale(1.1);
+}
+
+/* بخش اصلی */
+.card-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
   padding: 10px 0;
 }
 
-.weather-icon {
-  font-size: clamp(4rem, 12vw, 7rem);
+.card-icon {
+  font-size: clamp(3rem, 9vw, 4.5rem);
   line-height: 1;
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
   animation: float 3s ease-in-out infinite;
@@ -336,159 +352,164 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 }
 
-.weather-info {
+.card-info {
   text-align: right;
 }
 
-.weather-temp {
-  font-size: clamp(2.8rem, 9vw, 5rem);
+.card-temp {
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 900;
   line-height: 1;
-  color: var(--text-main);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   margin-bottom: 6px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.weather-city {
-  font-size: clamp(1rem, 3.5vw, 1.4rem);
+.card-city {
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-.weather-condition {
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  font-weight: 400;
+.card-condition {
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   color: var(--text-secondary);
 }
 
-/* ============================================
-   ۹. جزئیات
-   ============================================ */
-.weather-details {
+/* جزئیات */
+.card-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.detail-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 16px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  min-height: 110px;
-  justify-content: center;
-  transition: all 0.3s;
-}
-
-.detail-card:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.detail-icon {
-  font-size: 1.8rem;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
-}
-
-.detail-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.detail-label {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-.detail-value {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-/* ============================================
-   ۱۰. پیش‌بینی ساعتی
-   ============================================ */
-.hourly-section {
-  margin-top: 24px;
-  padding-top: 20px;
+  padding-top: 14px;
   border-top: 1px solid var(--glass-border);
 }
 
-.hourly-title {
-  font-size: 1rem;
+.card-detail {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 6px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.card-detail:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.card-detail-icon {
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card-detail-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.card-detail-value {
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 14px;
+}
+
+/* ============================================
+   ۱۰. کارت لودینگ (داخل گرید)
+   ============================================ */
+.card-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  min-height: 250px;
+  font-size: 0.9rem;
+}
+
+.card-loading .spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   ۱۱. پیش‌بینی ساعتی
+   ============================================ */
+.card-hourly {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.card-hourly-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.hourly-list {
+.card-hourly-list {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
-  overflow-y: hidden;
-  padding: 6px 4px 14px;
+  padding: 4px 2px 10px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  cursor: grab;
 }
 
-.hourly-list:active {
-  cursor: grabbing;
+.card-hourly-list::-webkit-scrollbar {
+  height: 5px;
 }
 
-.hourly-list::-webkit-scrollbar {
-  height: 6px;
-}
-
-.hourly-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+.card-hourly-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 }
 
-.hourly-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+.card-hourly-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
 }
 
 .hourly-item {
-  flex: 0 0 75px;
-  width: 75px;
-  padding: 14px 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  flex: 0 0 60px;
+  width: 60px;
+  padding: 10px 6px;
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   text-align: center;
   transition: all 0.3s;
 }
 
 .hourly-item:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 .hourly-item.now {
   background: var(--accent);
   color: #2c3e50;
   border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
 }
 
 .hourly-item.now .hourly-hour,
@@ -497,71 +518,34 @@ body {
 }
 
 .hourly-hour {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--text-secondary);
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: 500;
 }
 
 .hourly-icon {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
   display: block;
 }
 
 .hourly-temp {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--text-main);
 }
 
 /* ============================================
-   ۱۱. تبلت (۶۰۰px+)
+   ۱۲. ریسپانسیو
    ============================================ */
-@media (min-width: 600px) {
+@media (min-width: 700px) {
   .app {
-    max-width: 720px;
+    max-width: 1200px;
     padding: 36px 32px;
   }
-
-  .weather-main {
-    gap: 30px;
-  }
-
-  .hourly-item {
-    flex: 0 0 85px;
-    width: 85px;
-  }
 }
 
-/* ============================================
-   ۱۲. دسکتاپ (۱۰۰۰px+)
-   ============================================ */
-@media (min-width: 1000px) {
-  body {
-    padding: 30px 20px;
-  }
-
-  .app {
-    max-width: 900px;
-    padding: 45px 50px;
-  }
-
-  .hourly-item {
-    flex: 0 0 95px;
-    width: 95px;
-    padding: 16px 10px;
-  }
-
-  .hourly-icon {
-    font-size: 1.8rem;
-  }
-}
-
-/* ============================================
-   ۱۳. موبایل کوچک (۳۶۰px-)
-   ============================================ */
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .app {
     padding: 20px 16px;
   }
@@ -575,24 +559,20 @@ body {
     justify-content: center;
   }
 
-  .weather-main {
+  .cards-grid {
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .detail-card {
-    min-height: 90px;
-    padding: 12px 8px;
+  .card-details {
+    gap: 6px;
   }
 
-  .hourly-item {
-    flex: 0 0 65px;
-    width: 65px;
+  .card-detail {
+    padding: 8px 4px;
   }
 }
 
-/* ============================================
-   ۱۴. انیمیشن کاهش حرکت (دسترسی‌پذیری)
-   ============================================ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
